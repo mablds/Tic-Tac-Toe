@@ -5,7 +5,7 @@ A simple tic tac toe project created to improve my JS knowledge.
  ## Next steps: 
   - Singleplayer mode: Pending.
   - Score board aside: Not working.
-  - Appearence: bad yed LMAO.
+  - Appearence: horrible yet. :(
   - Stop game function when win/over(velha): Pending.
   
  ## Solved:
