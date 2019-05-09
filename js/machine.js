@@ -3,8 +3,8 @@ const pl1 = [] // pl1 = O
 const pl2 = [] // pl2 = X
 const finalArray = []
 let jogadas = 0;
-let o = 0
-let x = 0
+let playerO = 0
+let playerX = 0
 let win
 
 document.getElementById("start").addEventListener("click", start)
@@ -38,7 +38,7 @@ function gameTicTac() {
             this.className += " " + playAlternate[0]
             pl2.push(this.id)
             jogadas = jogadas + 1;
-            playAlternate.reverse()
+            // playAlternate.reverse()
             console.log("proximo a jogar: " + playAlternate[0])
             verifWin(possiblewins, pl2, jogadas)
         }
@@ -48,27 +48,41 @@ function gameTicTac() {
             console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[1])
         } else {
             this.className += " " + playAlternate[0]
+            finalArray.push(playAlternate[0])
             pl1.push(this.id)
             jogadas = jogadas + 1;
-            playAlternate.reverse()
             console.log("proximo a jogar: " + playAlternate[0])
             verifWin(possiblewins, pl1, jogadas)
         }
+        playAlternate.reverse()
+
 }
 
 function verifWin(winArr, playerArr, jogada) {
+    const ultimoKey = finalArray.length
+    const finalpositionArray = finalArray[ultimoKey-1]
+    
     let verif = false
     winArr.map(e => {
         if (!playerArr.includes(e)) {
             if (playerArr.includes(e[0]) && playerArr.includes(e[1]) && playerArr.includes(e[2])) {
                 verif = true
+
             }
         }
     })
 
     if (verif == true) {
         setTimeout(function () { alert("PARABÉNS! Temos um vencedor!") }, 300)
-        
+
+        if (finalpositionArray == "o") {
+            playerO += 1
+            document.getElementById("playerO").innerHTML += "<br>O wins: " + playerO
+        }
+        if (finalpositionArray == "x") {
+            playerX += 1
+            document.getElementById("playerX").innerHTML += "<br>X wins: " + playerX
+        }
     }
     if (jogada > 8 && verif == false) {
         setTimeout(function () { alert('DEU VELHA!') }, 300)

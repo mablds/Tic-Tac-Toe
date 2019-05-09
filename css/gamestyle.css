@@ -96,3 +96,15 @@ aside{
     margin-top: 2%; 
 }
 
+#O{
+    display: block;
+    height: 325px;
+    width: 100%;
+
+}
+
+#X{
+    display: block;
+    height: 325px;
+    width: 100%;  
+}
