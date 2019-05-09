@@ -1,6 +1,6 @@
 const player = ["x", "o"]
-const pl1 = [] // pl1 = O
-const pl2 = [] // pl2 = X
+let pl1 = [] // pl1 = O
+let pl2 = [] // pl2 = X
 const finalArray = []
 let jogadas = 0;
 let playerO = 0
@@ -41,6 +41,7 @@ function gameTicTac() {
             // playAlternate.reverse()
             console.log("proximo a jogar: " + playAlternate[0])
             verifWin(possiblewins, pl2, jogadas)
+            playAlternate.reverse()
         }
     }
     if (playAlternate[0] === "o") //playerAlternate[0] = ["o", "x"]
@@ -53,28 +54,30 @@ function gameTicTac() {
             jogadas = jogadas + 1;
             console.log("proximo a jogar: " + playAlternate[0])
             verifWin(possiblewins, pl1, jogadas)
+            playAlternate.reverse()
         }
-        playAlternate.reverse()
+    
 
 }
 
 function verifWin(winArr, playerArr, jogada) {
+
     const ultimoKey = finalArray.length
-    const finalpositionArray = finalArray[ultimoKey-1]
-    
+    const finalpositionArray = finalArray[ultimoKey - 1]
+
     let verif = false
     winArr.map(e => {
         if (!playerArr.includes(e)) {
             if (playerArr.includes(e[0]) && playerArr.includes(e[1]) && playerArr.includes(e[2])) {
                 verif = true
-
             }
         }
     })
 
     if (verif == true) {
-        setTimeout(function () { alert("PARABÉNS! Temos um vencedor!") }, 300)
-
+        const vectorAux = []
+        const zeraJogadas = 0
+        setTimeout(function () { alert("PARABÉNS! Temos um vencedor!") }, 200)
         if (finalpositionArray == "o") {
             playerO += 1
             document.getElementById("playerO").innerHTML += "<br>O wins: " + playerO
@@ -83,9 +86,20 @@ function verifWin(winArr, playerArr, jogada) {
             playerX += 1
             document.getElementById("playerX").innerHTML += "<br>X wins: " + playerX
         }
+        document.getElementById("um").className = 'square'
+        document.getElementById("dois").className = 'square'
+        document.getElementById("tres").className = 'square'
+        document.getElementById("quatro").className = 'square'
+        document.getElementById("cinco").className = 'square'
+        document.getElementById("seis").className = 'square'
+        document.getElementById("sete").className = 'square'
+        document.getElementById("oito").className = 'square'
+        document.getElementById("nove").className = 'square'
+        pl1 = vectorAux
+        pl2 = vectorAux
+        jogadas = zeraJogadas
     }
     if (jogada > 8 && verif == false) {
         setTimeout(function () { alert('DEU VELHA!') }, 300)
     }
 }
-
