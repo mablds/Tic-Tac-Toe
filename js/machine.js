@@ -1,13 +1,16 @@
 let player = ["x", "o"]
+let playAlternate = player
 let pl1 = [] // pl1 = O
 let pl2 = [] // pl2 = X
 const finalArray = []
-let jogadas = 0;
+
 let playerO = 0
 let playerX = 0
 let win
 
-document.getElementById("start").addEventListener("click", start)
+document.getElementById("start").addEventListener("click", startMultiple)
+document.getElementById("startSingle").addEventListener("click", startSingle)
+document.getElementById("start").addEventListener("click", startMultiple)
 document.getElementById("reset").addEventListener("click", reset)
 
 function reset() {
@@ -15,7 +18,7 @@ function reset() {
     start()
 }
 
-function start() {
+function startMultiple() {
     win = false
     if (win == false) {
         document.getElementById("um").addEventListener("click", gameTicTac)
@@ -28,37 +31,96 @@ function start() {
         document.getElementById("oito").addEventListener("click", gameTicTac)
         document.getElementById("nove").addEventListener("click", gameTicTac)
     }
-}
 
-function gameTicTac() {
-    const playAlternate = player
-    if (playAlternate[0] === "x") { //playerAlternate[0] = ["x", "o"]
-        if (this.className.includes(" x") || this.className.includes(" o")) {
-            console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[0])
-        } else {
-            this.className += " " + playAlternate[0]
-            pl2.push(this.id)
-            jogadas = jogadas + 1;
-            let verify = verifWin(possiblewins, pl2, jogadas)
-            if (verify == false) {
-                playAlternate.reverse()
+    function gameTicTac() {
+        let jogadasMultiple = 0;
+        if (playAlternate[0] === "x") { //playerAlternate[0] = ["x", "o"]
+            if (this.className.includes(" x") || this.className.includes(" o")) {
+                console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[0])
+            } else {
+                this.className += " " + playAlternate[0]
+                pl2.push(this.id)
+                jogadasMultiple = jogadasMultiple + 1;
+                let verify = verifWin(possiblewins, pl2, jogadasMultiple)
+                if (verify == false) {
+                    playAlternate.reverse()
+                }
+            }
+        }
+        if (playAlternate[0] === "o") { //playerAlternate[0] = ["o", "x"]
+            if (this.className.includes(" x") || this.className.includes(" o")) {
+                console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[0])
+            } else {
+                this.className += " " + playAlternate[0]
+                finalArray.push(playAlternate[0])
+                pl1.push(this.id)
+                jogadasMultiple = jogadasMultiple + 1;
+                let verify = (verifWin(possiblewins, pl1, jogadasMultiple))
+                if (verify == false) {
+                    playAlternate.reverse()
+                }
             }
         }
     }
-    if (playAlternate[0] === "o") //playerAlternate[0] = ["o", "x"]
+}
+
+
+function startSingle() {
+    let randomSquares = ["um", "dois", "tres", "quatro", "cinco", "seis", "sete", "oito", "nove"]
+    let jogadasSingle = 0;
+    win = false
+    if (win == false) {
+        document.getElementById("um").addEventListener("click", playAlone)
+        document.getElementById("dois").addEventListener("click", playAlone)
+        document.getElementById("tres").addEventListener("click", playAlone)
+        document.getElementById("quatro").addEventListener("click", playAlone)
+        document.getElementById("cinco").addEventListener("click", playAlone)
+        document.getElementById("seis").addEventListener("click", playAlone)
+        document.getElementById("sete").addEventListener("click", playAlone)
+        document.getElementById("oito").addEventListener("click", playAlone)
+        document.getElementById("nove").addEventListener("click", playAlone)
+    }
+    function playAlone() {
         if (this.className.includes(" x") || this.className.includes(" o")) {
             console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[0])
         } else {
             this.className += " " + playAlternate[0]
-            finalArray.push(playAlternate[0])
             pl1.push(this.id)
-            jogadas = jogadas + 1;
-            let verify = (verifWin(possiblewins, pl1, jogadas))
+            jogadasSingle = jogadasSingle + 1;
+            let verify = verifWin(possiblewins, pl1, jogadasSingle)
             if (verify == false) {
                 playAlternate.reverse()
+                playComputer()
             }
+
         }
+    }
+    //PLAY DO COMPUTADOR:
+    function playComputer() {
+        let computerplay = false
+        let ind
+        while (computerplay == false) {
+            ind = Math.floor(Math.random() * 10)
+            if (ind < 8)
+                computerplay = true
+        }
+        if(document.getElementById(""+randomSquares[ind]).className.includes(" x") || document.getElementById(""+randomSquares[ind]).className.includes(" o")){
+            console.log('não')
+            playComputer()
+        } else {
+            document.getElementById(""+randomSquares[ind]).className += " " + playAlternate[0]
+            const ide = document.getElementById(""+randomSquares[ind]).id
+            pl2.push(ide)
+        }
+        let verify = verifWin(possiblewins, pl2, jogadasSingle)
+            if (verify == false) {
+                playAlternate.reverse()
+                playAlone()
+            }
+    }
 }
+
+
 
 function verifWin(winArr, playerArr, jogada) {
     let verifando = false
@@ -101,7 +163,7 @@ function verifWin(winArr, playerArr, jogada) {
             document.getElementById("nove").className = 'square'
             pl1 = vectorAux
             pl2 = vectorAux2
-            jogadas = zeraJogadas
+            jogada = zeraJogadas
         }, 1000)
 
     }

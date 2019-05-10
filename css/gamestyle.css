@@ -1,6 +1,6 @@
 .control {
     margin: auto;
-    width: 40%;
+    width: 55%;
     height: 25px;
     background-color: lightgrey;
 }
@@ -12,7 +12,8 @@
     box-sizing: border-box;
     border: none;
     align-content: right;
-    
+    margin-right: 9%;
+    width: 119px;
 }
 
 .control a:hover {
@@ -28,7 +29,7 @@ body {
     position: relative;
 }
 .tictac {
-    margin-left: 9%;
+    margin-left: 22%;
     height: 650px;
     width: 70%;
     /* min-width: 500px; */
@@ -95,14 +96,14 @@ body {
     text-align: center;
 }
 
-aside{
+/* aside{
     width: 20%;
     height: 650px;
     padding-top: 2%;
     position: absolute;
     right: 0px;
     margin-top: 2%; 
-}
+} */
 
 #O{
     display: block;
