@@ -45,10 +45,8 @@ function gameTicTac() {
             this.className += " " + playAlternate[0]
             pl2.push(this.id)
             jogadas = jogadas + 1;
-            // playAlternate.reverse()
-            console.log("proximo a jogar: " + playAlternate[0])
             let verify = verifWin(possiblewins, pl2, jogadas)
-            console.log("pl2: "+pl2)
+            // console.log("pl2: "+pl2)
             if (verify == false) {
                 playAlternate.reverse()
             }
@@ -65,9 +63,9 @@ function gameTicTac() {
             finalArray.push(playAlternate[0])
             pl1.push(this.id)
             jogadas = jogadas + 1;
-            console.log("proximo a jogar: " + playAlternate[0])
+            // console.log("proximo a jogar: " + playAlternate[0])
             let verify = (verifWin(possiblewins, pl1, jogadas))
-            console.log("pl1: "+pl1)
+            // console.log("pl1: "+pl1)
             if (verify == false) {
                 playAlternate.reverse()
             }
@@ -91,16 +89,20 @@ function verifWin(winArr, playerArr, jogada) {
     if (verif == true) {
         verifando = true
         const vectorAux = []
+        const vectorAux2 = []
         const zeraJogadas = 0
         setTimeout(function () { alert("PARABÉNS! Temos um vencedor!") }, 500)
-        if (finalpositionArray == "o") {
-            playerO += 1
-            document.getElementById("playerO").innerHTML += "<br>O wins: " + playerO
-        }
-        if (finalpositionArray == "x") {
+        console.log('o proximo é: '+ finalArray[0])
+        
+        if (finalArray[0] === "x") {
             playerX += 1
-            document.getElementById("playerX").innerHTML += "<br>X wins: " + playerX
+            document.getElementById("playerO").innerHTML += "<br>x wins: " + playerX
         }
+        if (finalArray[0] === "o") {
+            playerO += 1
+            document.getElementById("playerX").innerHTML += "<br>O wins: " + playerO
+        }
+
         setTimeout(() => {
             document.getElementById("um").className = 'square'
             document.getElementById("dois").className = 'square'
@@ -112,7 +114,7 @@ function verifWin(winArr, playerArr, jogada) {
             document.getElementById("oito").className = 'square'
             document.getElementById("nove").className = 'square'
             pl1 = vectorAux
-            pl2 = vectorAux
+            pl2 = vectorAux2
             jogadas = zeraJogadas
         }, 1000)
 
