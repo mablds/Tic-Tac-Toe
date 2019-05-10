@@ -1,6 +1,6 @@
 let player = ["x", "o"]
-var pl1 = [] // pl1 = O
-var pl2 = [] // pl2 = X
+let pl1 = [] // pl1 = O
+let pl2 = [] // pl2 = X
 const finalArray = []
 let jogadas = 0;
 let playerO = 0
@@ -31,51 +31,40 @@ function start() {
 
 function gameTicTac() {
     const playAlternate = player
-    if(playerO > 0 || playerX > 0){
-        playAlternate.reverse()
-    }
-    console.log(playAlternate[0])
     if (playAlternate[0] === "x") { //playerAlternate[0] = ["x", "o"]
         if (this.className.includes(" x") || this.className.includes(" o")) {
-            console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[1])
+            console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[0])
         } else {
-            if(playerO > 0 || playerX > 0){
-                playAlternate.reverse()
-            }
             this.className += " " + playAlternate[0]
             pl2.push(this.id)
             jogadas = jogadas + 1;
             let verify = verifWin(possiblewins, pl2, jogadas)
-            // console.log("pl2: "+pl2)
             if (verify == false) {
                 playAlternate.reverse()
+            } else {
+                pl2.push("winX")
             }
         }
     }
     if (playAlternate[0] === "o") //playerAlternate[0] = ["o", "x"]
         if (this.className.includes(" x") || this.className.includes(" o")) {
-            console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[1])
+            console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[0])
         } else {
-            if(playerO > 0 || playerX > 0){
-                playAlternate.reverse()
-            }
             this.className += " " + playAlternate[0]
             finalArray.push(playAlternate[0])
             pl1.push(this.id)
             jogadas = jogadas + 1;
-            // console.log("proximo a jogar: " + playAlternate[0])
             let verify = (verifWin(possiblewins, pl1, jogadas))
-            // console.log("pl1: "+pl1)
             if (verify == false) {
                 playAlternate.reverse()
+            } else {
+                pl1.push("winO")
             }
         }
 }
 
 function verifWin(winArr, playerArr, jogada) {
     let verifando = false
-    const ultimoKey = finalArray.length
-    const finalpositionArray = finalArray[ultimoKey - 1]
 
     let verif = false
     winArr.map(e => {
@@ -92,13 +81,13 @@ function verifWin(winArr, playerArr, jogada) {
         const vectorAux2 = []
         const zeraJogadas = 0
         setTimeout(function () { alert("PARABÉNS! Temos um vencedor!") }, 500)
-        console.log('o proximo é: '+ finalArray[0])
-        
-        if (finalArray[0] === "x") {
+        console.log('o proximo é: ' + finalArray[0])
+        console.log(playerArr)
+        if (playerArr.includes("winX")) {
             playerX += 1
             document.getElementById("playerO").innerHTML += "<br>x wins: " + playerX
         }
-        if (finalArray[0] === "o") {
+        if (playerArr.includes("winO")) {
             playerO += 1
             document.getElementById("playerX").innerHTML += "<br>O wins: " + playerO
         }
