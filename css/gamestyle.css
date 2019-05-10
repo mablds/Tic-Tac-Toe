@@ -36,9 +36,16 @@ body {
     position: absolute;
 }
 
+/* .nao {
+    padding: 10px;
+    width: 26%;
+    height: 40%;
+    display: inline-block;
+    background-color: lightgray;
+    box-sizing: border-box;
+} */
 
 .square {
-    
     padding: 10px;
     width: 26%;
     height: 40%;
