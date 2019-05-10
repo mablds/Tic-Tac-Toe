@@ -3,9 +3,9 @@ A simple tic tac toe project created to improve my JS knowledge.
 
  
  ## Next steps: 
-  - Bug second round pl1/pl2 vector
   - Singleplayer mode: Pending.
   - Appearence: horrible yet. :(
+  - Reponsive: HORRIBLE.
  
   
  ## Solved:
@@ -14,3 +14,4 @@ A simple tic tac toe project created to improve my JS knowledge.
   - multiple clicks issue: :white_check_mark:
   - Start and Reset button: :white_check_mark:
   - Winning system logics: :white_check_mark:
+  - Bug second round pl1/pl2 vector: :white_check_mark:
