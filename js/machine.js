@@ -12,6 +12,7 @@ document.getElementById("reset").addEventListener("click", reset)
 
 function reset() {
     location.reload()
+    start()
 }
 
 function start() {
@@ -41,8 +42,6 @@ function gameTicTac() {
             let verify = verifWin(possiblewins, pl2, jogadas)
             if (verify == false) {
                 playAlternate.reverse()
-            } else {
-                pl2.push("winX")
             }
         }
     }
@@ -57,8 +56,6 @@ function gameTicTac() {
             let verify = (verifWin(possiblewins, pl1, jogadas))
             if (verify == false) {
                 playAlternate.reverse()
-            } else {
-                pl1.push("winO")
             }
         }
 }
