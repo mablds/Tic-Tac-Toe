@@ -4,10 +4,6 @@ let pl1 = [] // pl1 = O
 let pl2 = [] // pl2 = X
 const finalArray = []
 
-let playerO = 0
-let playerX = 0
-let win
-
 document.getElementById("start").addEventListener("click", startMultiple)
 document.getElementById("startSingle").addEventListener("click", startSingle)
 document.getElementById("start").addEventListener("click", startMultiple)
@@ -15,7 +11,6 @@ document.getElementById("reset").addEventListener("click", reset)
 
 function reset() {
     location.reload()
-    start()
 }
 
 function startMultiple() {
@@ -41,6 +36,7 @@ function startMultiple() {
                 this.className += " " + playAlternate[0]
                 pl2.push(this.id)
                 jogadasMultiple = jogadasMultiple + 1;
+                console.log("num jogadas "+jogadasMultiple)
                 let verify = verifWin(possiblewins, pl2, jogadasMultiple)
                 if (verify == false) {
                     playAlternate.reverse()
@@ -55,6 +51,7 @@ function startMultiple() {
                 finalArray.push(playAlternate[0])
                 pl1.push(this.id)
                 jogadasMultiple = jogadasMultiple + 1;
+                console.log("num jogadas "+jogadasMultiple)
                 let verify = (verifWin(possiblewins, pl1, jogadasMultiple))
                 if (verify == false) {
                     playAlternate.reverse()
@@ -80,6 +77,7 @@ function startSingle() {
         document.getElementById("oito").addEventListener("click", playAlone)
         document.getElementById("nove").addEventListener("click", playAlone)
     }
+
     function playAlone() {
         if (this.className.includes(" x") || this.className.includes(" o")) {
             console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[0])
@@ -95,6 +93,7 @@ function startSingle() {
 
         }
     }
+
     //PLAY DO COMPUTADOR:
     function playComputer() {
         let computerplay = false
@@ -104,23 +103,21 @@ function startSingle() {
             if (ind < 8)
                 computerplay = true
         }
-        if(document.getElementById(""+randomSquares[ind]).className.includes(" x") || document.getElementById(""+randomSquares[ind]).className.includes(" o")){
+        if (document.getElementById("" + randomSquares[ind]).className.includes(" x") || document.getElementById("" + randomSquares[ind]).className.includes(" o")) {
             console.log('não')
             playComputer()
         } else {
-            document.getElementById(""+randomSquares[ind]).className += " " + playAlternate[0]
-            const ide = document.getElementById(""+randomSquares[ind]).id
+            document.getElementById("" + randomSquares[ind]).className += " " + playAlternate[0]
+            const ide = document.getElementById("" + randomSquares[ind]).id
             pl2.push(ide)
         }
         let verify = verifWin(possiblewins, pl2, jogadasSingle)
-            if (verify == false) {
-                playAlternate.reverse()
-                playAlone()
-            }
+        if (verify == false) {
+            playAlternate.reverse()
+            playAlone()
+        }
     }
 }
-
-
 
 function verifWin(winArr, playerArr, jogada) {
     let verifando = false
@@ -136,9 +133,6 @@ function verifWin(winArr, playerArr, jogada) {
 
     if (verif == true) {
         verifando = true
-        const vectorAux = []
-        const vectorAux2 = []
-        const zeraJogadas = 0
         setTimeout(function () { alert("PARABÉNS! Temos um vencedor!") }, 500)
         console.log('o proximo é: ' + finalArray[0])
         console.log(playerArr)
@@ -161,14 +155,29 @@ function verifWin(winArr, playerArr, jogada) {
             document.getElementById("sete").className = 'square'
             document.getElementById("oito").className = 'square'
             document.getElementById("nove").className = 'square'
-            pl1 = vectorAux
-            pl2 = vectorAux2
-            jogada = zeraJogadas
+            pl1 = []
+            pl2 = []
+            jogada = 0
         }, 1000)
 
     }
     if (jogada > 8 && verif == false) {
         setTimeout(function () { alert('DEU VELHA!') }, 800)
+        jogada = 0
+        pl1 = []
+        pl2 = []
+        setTimeout(() => {
+            document.getElementById("um").className = 'square'
+            document.getElementById("dois").className = 'square'
+            document.getElementById("tres").className = 'square'
+            document.getElementById("quatro").className = 'square'
+            document.getElementById("cinco").className = 'square'
+            document.getElementById("seis").className = 'square'
+            document.getElementById("sete").className = 'square'
+            document.getElementById("oito").className = 'square'
+            document.getElementById("nove").className = 'square'
+        }, 1000)
+        reset()
     }
     return verifando
 }
