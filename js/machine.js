@@ -17,6 +17,8 @@ function reset() {
 }
 
 function startMultiple() {
+    pl1 = []
+    pl2 = []
 
     document.getElementById("um").className = 'square'
     document.getElementById("dois").className = 'square'
@@ -167,10 +169,6 @@ function verifWin(winArr, playerArr, jogada, mode) {
             if (playerArr.includes(e[0]) && playerArr.includes(e[1]) && playerArr.includes(e[2])) {
                 verif = true
                 randomSquares = ["um", "dois", "tres", "quatro", "cinco", "seis", "sete", "oito", "nove"]
-                jogadasMultiple = jogadasMultiple - jogadasMultiple
-                jogadasSingle = jogadasSingle - jogadasSingle
-                pl1 = []
-                pl2 = []
             }
         }
     })
@@ -182,9 +180,13 @@ function verifWin(winArr, playerArr, jogada, mode) {
 
         setTimeout(() => {
             if (mode === 1) {
+                jogadasSingle = jogadasSingle - jogadasSingle
+                pl1 = []
+                pl2 = []
                 startSingle()
             }
             if (mode === 2) {
+                jogadasMultiple = jogadasMultiple - jogadasMultiple
                 startMultiple()
             }
 
@@ -193,9 +195,11 @@ function verifWin(winArr, playerArr, jogada, mode) {
     if (jogada > 8 && verif == false) {
         setTimeout(() => { alert('DEU VELHA!') }, 800)
         if (mode === 1) {
+            jogadasSingle = jogadasSingle - jogadasSingle
             setTimeout(() => { startSingle() }, 1900)
         }
         if (mode === 2) {
+            jogadasMultiple = jogadasMultiple - jogadasMultiple
             setTimeout(() => { startMultiple() }, 1900)
         }
     }
