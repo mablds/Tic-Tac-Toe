@@ -54,6 +54,13 @@ var possiblewins = [
     ["tres", "cinco", "sete"],
     ["cinco", "tres", "sete"],
     ["cinco", "sete", "tres"],
+
+    ["tres", "seis", "nove"],
+    ["tres", "nove", "seis"],
+    ["seis", "tres", "nove"],
+    ["seis", "nove", "tres"],
+    ["nove", "seis", "tres"],
+    ["nove", "tres", "seis"],
 ]
 
 // export { possiblewins }
