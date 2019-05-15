@@ -19,8 +19,3 @@ A simple tic tac toe project created to improve my JS knowledge.
   - Start and Reset button: :white_check_mark:
   - Winning system logics: :white_check_mark:
   - Bug second round pl1/pl2 vector: :white_check_mark:
-
-## How to play:
-  - Clone the repository;
-  - go to './html/';
-  - open the index.html and have fun;
