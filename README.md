@@ -1,15 +1,19 @@
 # Tic-Tac-Toe
 A simple tic tac toe project created to improve my JS knowledge.
 
+## How to play:
+  - Clone the repository;
+  - go to './html/';
+  - open the index.html and have fun;
  
  ## Next steps: 
-  - Singleplayer mode: Pending.
-  - Appearence: horrible yet. :(
-  - Reponsive: HORRIBLE.
- 
+  - Logics to win or draw. Bot invencible: Thinking about the manners to do it.
+  - Appearence: Acceptable, but in progress...
+  - Score board aside: Not working
   
  ## Solved:
-  - Score board aside: :white_check_mark:
+  - Singleplayer mode: :white_check_mark:
+  - Reponsive: Somewhat good :white_check_mark:
   - Stop game function when win/over(velha): :white_check_mark:
   - multiple clicks issue: :white_check_mark:
   - Start and Reset button: :white_check_mark:
