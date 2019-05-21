@@ -248,19 +248,19 @@ function ultimateMode() {
             }
             possiblewins.find(el => {
                 if (el.includes(plays1[0])) {
-                    return el
+                    return el.arrayRemove2(el, plays1[0])
                 }
             })
 
         }
-        if (plays1.length === 2) {
-            possiblewins.find(el => {
-                plays1
-                if (el[0] === plays1[0] && el[1] === plays1[1] && !plays2.includes(el[2])) {
-                    return el[2]
-                }
-            })
-        }
+        // if (plays1.length === 2) {
+        //     possiblewins.find(el => {
+        //         plays1
+        //         if (el[0] === plays1[0] && el[1] === plays1[1] && !plays2.includes(el[2])) {
+        //             return el[2]
+        //         }
+        //     })
+        // }
     }
 }
 
