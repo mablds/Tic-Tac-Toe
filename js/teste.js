@@ -36,13 +36,9 @@ const ha = [
     }
 ]
 
-const bla = ha.map((el) => {
-    const { nome, sexo, idade } = el
-    return {
-        nome: nome.toLowerCase(),
-        sexo: sexo.toLowerCase(),
-        idade: idade
-    }
+const bla = ha.filter((el) => {
+    if(el.sexo === "Homem" && el.idade >= 5)
+        return el
 })
 
 console.log(bla)
