@@ -20,15 +20,7 @@ function startMultiple() {
     pl1 = []
     pl2 = []
 
-    document.getElementById("um").className = 'square'
-    document.getElementById("dois").className = 'square'
-    document.getElementById("tres").className = 'square'
-    document.getElementById("quatro").className = 'square'
-    document.getElementById("cinco").className = 'square'
-    document.getElementById("seis").className = 'square'
-    document.getElementById("sete").className = 'square'
-    document.getElementById("oito").className = 'square'
-    document.getElementById("nove").className = 'square'
+    zera()
 
     win = false
     if (win == false) {
@@ -78,15 +70,7 @@ function startMultiple() {
 
 function startSingle() {
 
-    document.getElementById("um").className = 'square'
-    document.getElementById("dois").className = 'square'
-    document.getElementById("tres").className = 'square'
-    document.getElementById("quatro").className = 'square'
-    document.getElementById("cinco").className = 'square'
-    document.getElementById("seis").className = 'square'
-    document.getElementById("sete").className = 'square'
-    document.getElementById("oito").className = 'square'
-    document.getElementById("nove").className = 'square'
+    zera()
 
     randomSquares = ["um", "dois", "tres", "quatro", "cinco", "seis", "sete", "oito", "nove"]
     win = false
@@ -174,7 +158,7 @@ function ultimateMode() {
 
     randomSquares = ["um", "dois", "tres", "quatro", "cinco", "seis", "sete", "oito", "nove"]
     win = false
-    if (win == false) {
+    if (win === false) {
         document.getElementById("um").addEventListener("click", playUltimate)
         document.getElementById("dois").addEventListener("click", playUltimate)
         document.getElementById("tres").addEventListener("click", playUltimate)
@@ -190,16 +174,14 @@ function ultimateMode() {
         if (this.className.includes(" x") || this.className.includes(" o")) {
             console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[0])
         } else {
-            this.className += " " + playAlternate[0]
+            this.className += " x"
             pl1.push(this.id)
             jogadasSingle = jogadasSingle + 1;
-
             randomSquares = arrayRemove2(randomSquares, this.id)
             console.log(randomSquares)
-
             let verify = verifWin(possiblewins, pl1, jogadasSingle, 3)
             if (verify == false) {
-                playAlternate.reverse()
+                // playAlternate.reverse()
                 playMaster()
             }
         }
@@ -211,24 +193,30 @@ function ultimateMode() {
         })
     }
 
+    function randomNumers(randomSquares) {
+        let cont = false
+        let ide
+        while (cont === false) {
+            ide = Math.floor(Math.random() * 10)
+            if (ide < randomSquares.length) {
+                cont = true //Fim do looping
+            }
+        }
+        return ide
+    }
+
     function playMaster() {
         if (randomSquares[0]) {
             let ideComputer = strategyPlay(pl1, pl2, randomSquares)
-
             console.log(ideComputer)
-            if (document.getElementById(" " + ideComputer[0]).className.includes(" x") || document.getElementById(" " + ideComputer[0]).className.includes(" o")) {
-                console.log("opção inválida! escolha um campo vazio. próximo a jogar: " + playAlternate[0])
-            } else {
-                document.getElementById(" " + ideComputer[0]).className += " " + playAlternate[0]
-                pl2.push(document.getElementById(" " + ideComputer[0]).id)
-                jogadasSingle = jogadasSingle + 1;
-                randomSquares = arrayRemove2(randomSquares, document.getElementById(" " + ideComputer[0]).id)
-                console.log(randomSquares)
-                let verify = verifWin(possiblewins, pl1, jogadasSingle, 3)
-                if (verify == false) {
-                    playAlternate.reverse()
-                    playUltimate()
-                }
+            document.getElementById(ideComputer).className += " o"
+            pl2.push(document.getElementById(" " + ideComputer).id)
+            jogadasSingle = jogadasSingle + 1;
+            randomSquares = arrayRemove2(randomSquares, document.getElementById(" " + ideComputer).id)
+            console.log(randomSquares)
+            let verify = verifWin(possiblewins, pl1, jogadasSingle, 3)
+            if (verify == false) {
+                playUltimate()
             }
         } else {
             console.log('sem jogadas a fazer. Deu velha.')
@@ -236,31 +224,35 @@ function ultimateMode() {
     }
 
     function strategyPlay(plays1, plays2, randomSquares) {
-        console.log(plays1)
-        console.log(plays2)
         if (plays1.length === 1) {
-            let computerplay = false
-            let ind
-            while (computerplay == false) {
-                ind = Math.floor(Math.random() * 10)
-                if (ind >= 0 && ind < randomSquares.length)
-                    computerplay = true
+            if (plays1[0] === "cinco") {
+                return randomSquares[randomNumers(randomSquares)]
+            } else {
+                return "cinco"
             }
-            possiblewins.find(el => {
-                if (el.includes(plays1[0])) {
-                    return el.arrayRemove2(el, plays1[0])
+        }
+        if (plays1.length === 2) {
+            possiblewins.filter((el) => {
+                if (el[0] === plays1[0] && el[1] === plays1[1]) {
+                    return playSolution(2, el)
+                }
+                if (el[0] === plays2[0]) {
+                    console.log('cheguei aqui')
+                    return playSolution(1, el)
                 }
             })
-
         }
-        // if (plays1.length === 2) {
-        //     possiblewins.find(el => {
-        //         plays1
-        //         if (el[0] === plays1[0] && el[1] === plays1[1] && !plays2.includes(el[2])) {
-        //             return el[2]
-        //         }
-        //     })
-        // }
+    }
+    function playSolution(qtd, arrayWin){
+        console.log('esse é o arry win: '+ arrayWin)
+        if (qtd == 2){
+            console.log('jogada:' +arrayWin[2])
+            return arrayWin[2]
+        }
+        if (qtd == 1){
+            console.log('jogada:' +arrayWin[1])
+            return arrayWin[1]
+        }
     }
 }
 
@@ -273,7 +265,6 @@ function verifWin(winArr, playerArr, jogada, mode) {
         if (!playerArr.includes(e)) {
             if (playerArr.includes(e[0]) && playerArr.includes(e[1]) && playerArr.includes(e[2])) {
                 verif = true
-                // randomSquares = ["um", "dois", "tres", "quatro", "cinco", "seis", "sete", "oito", "nove"]
             }
         }
     })
@@ -282,7 +273,6 @@ function verifWin(winArr, playerArr, jogada, mode) {
         verifando = true
         setTimeout(function () { alert("PARABÉNS! Temos um vencedor!") }, 800)
         console.log(playerArr)
-
         setTimeout(() => {
             if (mode === 1) {
                 jogadasSingle = jogadasSingle - jogadasSingle
@@ -298,7 +288,6 @@ function verifWin(winArr, playerArr, jogada, mode) {
                 jogadasMultiple = jogadasMultiple - jogadasMultiple
                 ultimateMode()
             }
-
         }, 1000)
     }
     if (jogada > 8 && verif == false) {
